@@ -1,5 +1,6 @@
 package com.melchikov.artspaceapp
 
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -14,6 +15,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -44,14 +46,15 @@ fun ArtScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .padding(16.dp)
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         ArtImage(imageId = currentArt.imageRes, title = currentArt.title)
-        Spacer(modifier = Modifier.height(14.dp))
+        Spacer(modifier = Modifier.height(24.dp))
         ArtDescription(title = currentArt.title, artist = currentArt.artist, year = currentArt.year)
-        Spacer(modifier = Modifier.height(14.dp))
+        Spacer(modifier = Modifier.height(48.dp))
         NavigationButtons(
             onPrevious = { currentIndex = getPreviousIndex(currentIndex, artworks.size) },
             onNext = { currentIndex = getNextIndex(currentIndex, artworks.size) }
@@ -61,9 +64,14 @@ fun ArtScreen() {
 
 @Composable
 fun ArtImage(imageId: Int, title: String) {
+    val configuration = LocalConfiguration.current
+    val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+
     Card(
         shape = RoundedCornerShape(10.dp),
-        modifier = Modifier.padding(16.dp),
+        modifier = Modifier
+            .fillMaxWidth(if (isLandscape) 0.5f else 1f)
+            .padding(horizontal = 16.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White),
         elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
     ) {
@@ -71,23 +79,30 @@ fun ArtImage(imageId: Int, title: String) {
             painter = painterResource(id = imageId),
             contentDescription = title,
             modifier = Modifier
-                .size(300.dp)
+                .fillMaxWidth()
                 .padding(14.dp)
+                .aspectRatio(if (isLandscape) 1.5f else 1f)
         )
     }
 }
 
+
 @Composable
 fun ArtDescription(title: String, artist: String, year: String) {
+    val configuration = LocalConfiguration.current
+    val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+
     Card(
         shape = RoundedCornerShape(10.dp),
-        modifier = Modifier.padding(16.dp),
+        modifier = Modifier
+            .fillMaxWidth(if (isLandscape) 0.5f else 1f)
+            .padding(horizontal = 16.dp),
         colors = CardDefaults.cardColors(containerColor = Color(0xFFECEBF4)),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
         Column(
             modifier = Modifier.padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.Start
         ) {
             Text(text = title, style = MaterialTheme.typography.headlineMedium)
             Text(text = "$artist, $year", style = MaterialTheme.typography.bodyMedium)
@@ -97,7 +112,15 @@ fun ArtDescription(title: String, artist: String, year: String) {
 
 @Composable
 fun NavigationButtons(onPrevious: () -> Unit, onNext: () -> Unit) {
-    Row(modifier = Modifier.padding(20.dp)) {
+    val configuration = LocalConfiguration.current
+    val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+
+    Row(
+        modifier = Modifier
+            .fillMaxWidth(if (isLandscape) 0.5f else 1f)
+            .padding(horizontal = 16.dp),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
         Button(
             onClick = onPrevious,
             modifier = Modifier
@@ -106,7 +129,7 @@ fun NavigationButtons(onPrevious: () -> Unit, onNext: () -> Unit) {
         ) {
             Text("Previous")
         }
-        Spacer(modifier = Modifier.width(20.dp))
+        Spacer(modifier = Modifier.width(10.dp))
         Button(
             onClick = onNext,
             modifier = Modifier
