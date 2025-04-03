@@ -64,8 +64,7 @@ fun ArtScreen() {
 
 @Composable
 fun ArtImage(imageId: Int, title: String) {
-    val configuration = LocalConfiguration.current
-    val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+    val isLandscape = LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE
 
     Card(
         shape = RoundedCornerShape(10.dp),
@@ -89,8 +88,7 @@ fun ArtImage(imageId: Int, title: String) {
 
 @Composable
 fun ArtDescription(title: String, artist: String, year: String) {
-    val configuration = LocalConfiguration.current
-    val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+    val isLandscape = LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE
 
     Card(
         shape = RoundedCornerShape(10.dp),
@@ -112,8 +110,7 @@ fun ArtDescription(title: String, artist: String, year: String) {
 
 @Composable
 fun NavigationButtons(onPrevious: () -> Unit, onNext: () -> Unit) {
-    val configuration = LocalConfiguration.current
-    val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+    val isLandscape = LocalConfiguration.current.orientation == Configuration.ORIENTATION_LANDSCAPE
 
     Row(
         modifier = Modifier
