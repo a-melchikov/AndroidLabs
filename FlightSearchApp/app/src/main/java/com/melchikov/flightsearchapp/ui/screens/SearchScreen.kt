@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
-import com.melchikov.flightsearchapp.data.FlightViewModel
+import com.melchikov.flightsearchapp.ui.viewmodels.FlightViewModel
 import com.melchikov.flightsearchapp.data.model.Airport
 import com.melchikov.flightsearchapp.data.model.Flight
 import com.melchikov.flightsearchapp.ui.components.AirportItem

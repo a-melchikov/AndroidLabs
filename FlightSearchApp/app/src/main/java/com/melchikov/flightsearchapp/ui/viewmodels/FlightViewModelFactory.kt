@@ -1,12 +1,12 @@
-package com.melchikov.flightsearchapp.data
+package com.melchikov.flightsearchapp.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.melchikov.flightsearchapp.data.dao.AirportDao
 import com.melchikov.flightsearchapp.data.dao.FavoriteDao
 import com.melchikov.flightsearchapp.data.repository.AirportRepository
-import com.melchikov.flightsearchapp.data.repository.SearchPreferencesRepository
 import com.melchikov.flightsearchapp.data.repository.FavoriteRepository
+import com.melchikov.flightsearchapp.data.repository.SearchPreferencesRepository
 
 class FlightViewModelFactory(
     private val airportDao: AirportDao,

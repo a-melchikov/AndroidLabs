@@ -13,8 +13,8 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.melchikov.flightsearchapp.data.FlightDatabase
-import com.melchikov.flightsearchapp.data.FlightViewModel
-import com.melchikov.flightsearchapp.data.FlightViewModelFactory
+import com.melchikov.flightsearchapp.ui.viewmodels.FlightViewModel
+import com.melchikov.flightsearchapp.ui.viewmodels.FlightViewModelFactory
 import com.melchikov.flightsearchapp.data.repository.SearchPreferencesRepository
 import com.melchikov.flightsearchapp.ui.screens.FlightSearchApp
 import com.melchikov.flightsearchapp.ui.theme.FlightSearchAppTheme

@@ -1,4 +1,4 @@
-package com.melchikov.flightsearchapp.data
+package com.melchikov.flightsearchapp.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

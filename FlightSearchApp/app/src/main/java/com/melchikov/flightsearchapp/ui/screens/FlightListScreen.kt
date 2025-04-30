@@ -10,7 +10,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.melchikov.flightsearchapp.data.FlightViewModel
+import com.melchikov.flightsearchapp.ui.viewmodels.FlightViewModel
 import com.melchikov.flightsearchapp.ui.components.FlightItem
 
 @OptIn(ExperimentalMaterial3Api::class)

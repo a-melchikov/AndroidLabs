@@ -22,17 +22,31 @@ abstract class FlightDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: FlightDatabase? = null
 
+        // https://en.wikipedia.org/wiki/Double-checked_locking
         fun getDatabase(context: Context): FlightDatabase {
-            return INSTANCE ?: synchronized(this) {
-                val instance = Room.databaseBuilder(
+            // Первая проверка
+            val tempInstance = INSTANCE
+            if (tempInstance != null) {
+                return tempInstance
+            }
+
+            // Вторая проверка
+            synchronized(this) {
+                val instance = INSTANCE
+                if (instance != null) {
+                    return instance
+                }
+
+                val createdInstance = Room.databaseBuilder(
                     context.applicationContext,
                     FlightDatabase::class.java,
                     "flight_search.db"
                 )
                     .createFromAsset("flight_search.db")
                     .build()
-                INSTANCE = instance
-                instance
+
+                INSTANCE = createdInstance
+                return createdInstance
             }
         }
     }
