@@ -13,16 +13,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.melchikov.mycityapp.repository.CityRepository
+import com.melchikov.mycityapp.ui.viewmodels.CityViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailScreen(
     navController: NavController,
-    recommendationId: Int
+    recommendationId: Int,
+    viewModel: CityViewModel = viewModel()
 ) {
-    val recommendation = CityRepository.getRecommendationById(recommendationId)
+    val recommendation = viewModel.getRecommendation(recommendationId)
 
     recommendation?.let { rec ->
         Scaffold(
@@ -47,7 +49,9 @@ fun DetailScreen(
                     .verticalScroll(rememberScrollState())
             ) {
                 Image(
-                    painter = painterResource(id = rec.imageRes ?: android.R.drawable.ic_menu_gallery),
+                    painter = painterResource(
+                        id = rec.imageRes ?: android.R.drawable.ic_menu_gallery
+                    ),
                     contentDescription = rec.name,
                     modifier = Modifier
                         .fillMaxWidth()

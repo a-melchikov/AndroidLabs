@@ -10,17 +10,19 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.melchikov.mycityapp.repository.CityRepository
 import com.melchikov.mycityapp.model.Recommendation
+import com.melchikov.mycityapp.ui.viewmodels.CityViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CategoryScreen(
     navController: NavController,
-    categoryId: Int
+    categoryId: Int,
+    viewModel: CityViewModel = viewModel()
 ) {
-    val recommendations = CityRepository.getRecommendations(categoryId)
+    val recommendations = viewModel.getRecommendations(categoryId)
 
     Scaffold(
         topBar = {

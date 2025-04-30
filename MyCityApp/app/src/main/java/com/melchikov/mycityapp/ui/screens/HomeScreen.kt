@@ -10,13 +10,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.melchikov.mycityapp.repository.CityRepository
 import com.melchikov.mycityapp.model.Category
+import com.melchikov.mycityapp.ui.viewmodels.CityViewModel
 
 @Composable
-fun HomeScreen(navController: NavController) {
-    val categories = CityRepository.getCategories()
+fun HomeScreen(
+    navController: NavController, viewModel: CityViewModel = viewModel()
+) {
+    val categories = viewModel.categories
 
     Column(
         modifier = Modifier
