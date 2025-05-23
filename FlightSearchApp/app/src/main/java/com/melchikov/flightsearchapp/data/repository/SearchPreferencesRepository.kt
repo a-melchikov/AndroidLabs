@@ -15,7 +15,6 @@ class SearchPreferencesRepository(
 ) {
     private companion object {
         val SEARCH_QUERY_KEY = stringPreferencesKey("search_query")
-        const val TAG = "SearchPreferencesRepo"
     }
 
     val searchQuery: Flow<String> = dataStore.data

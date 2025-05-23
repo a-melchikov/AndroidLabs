@@ -1,14 +1,18 @@
-package com.melchikov.weatherapiapp.data
+package com.melchikov.weatherapiapp.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.melchikov.weatherapiapp.model.CityResponse
 import com.melchikov.weatherapiapp.model.WeatherResponse
+import com.melchikov.weatherapiapp.repository.WeatherRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class WeatherViewModel : ViewModel() {
+class WeatherViewModel(
+    private val repository: WeatherRepository
+) : ViewModel() {
+
     private val _cities = MutableStateFlow<List<CityResponse>>(emptyList())
     val cities: StateFlow<List<CityResponse>> = _cities
 
@@ -21,7 +25,7 @@ class WeatherViewModel : ViewModel() {
     fun loadCity(cityName: String) {
         viewModelScope.launch {
             try {
-                _cities.value = ApiClient.cityApiService.getCityInfo(cityName)
+                _cities.value = repository.getCities(cityName)
                 _error.value = null
             } catch (e: Exception) {
                 _error.value = "City error: ${e.message}"
@@ -32,7 +36,7 @@ class WeatherViewModel : ViewModel() {
     fun loadWeather(latitude: Double, longitude: Double) {
         viewModelScope.launch {
             try {
-                _weather.value = ApiClient.weatherApiService.getWeather(latitude, longitude)
+                _weather.value = repository.getWeather(latitude, longitude)
                 _error.value = null
             } catch (e: Exception) {
                 _error.value = "Weather error: ${e.message}"

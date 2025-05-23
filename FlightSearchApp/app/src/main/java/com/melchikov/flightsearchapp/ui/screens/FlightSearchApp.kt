@@ -11,7 +11,6 @@ import com.melchikov.flightsearchapp.ui.viewmodels.FlightViewModel
 @Composable
 fun FlightSearchApp(viewModel: FlightViewModel) {
     val navController = rememberNavController()
-    val selectedAirport by viewModel.selectedAirport.collectAsState()
 
     NavHost(
         navController = navController,

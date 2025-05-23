@@ -104,10 +104,4 @@ class FlightViewModel(
         return airports.value.find { it.iataCode == code }
     }
 
-
-    fun clearSelection() {
-        _selectedAirport.value = null
-        _flights.value = emptyList()
-        _airports.value = emptyList()
-    }
 }

@@ -15,6 +15,10 @@ class AirportRepository(private val airportDao: AirportDao) {
         return airportDao.searchAirports(formattedQuery)
     }
 
+    private suspend fun getAllAirports(): List<Airport> {
+        return airportDao.getAll().first()
+    }
+
     fun generateFlightsForAirports(): Flow<List<Flight>> = flow {
         val airports = getAllAirports()
 
@@ -34,7 +38,4 @@ class AirportRepository(private val airportDao: AirportDao) {
         emit(flights)
     }
 
-    private suspend fun getAllAirports(): List<Airport> {
-        return airportDao.getAll().first()
-    }
 }
